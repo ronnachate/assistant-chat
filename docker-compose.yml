@@ -1,0 +1,40 @@
+---
+#docker compose file for dev env setup
+version: '3'
+services:
+  assitantdb:
+    image: postgres:14
+    environment:
+      - TZ=Asia/Jakarta
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - assitantdb:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    environment:
+      - TZ=Asia/Jakarta
+    ports:
+      - '15672:15672'
+      - '5672:5672'
+
+  seq:
+    image: datalust/seq:latest
+    environment:
+      - ACCEPT_EULA=Y
+      - TZ=Asia/Jakarta
+    ports:
+      - '5340:80'
+  
+  apigateway:
+    image: envoyproxy/envoy:v1.11.1
+    volumes:
+      - ./apigateway/envoy/envoy.yaml:/etc/envoy/envoy.yaml
+    ports:
+    - "4200:80"
+
+volumes:
+  assitantdb:
+    external: false
