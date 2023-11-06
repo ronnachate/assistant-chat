@@ -1,0 +1,33 @@
+{
+  "name": "assistan-web-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/assistan-web-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/assistan-web-e2e/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "assistan-web:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "assistan-web:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "assistan-web:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/assistan-web-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "implicitDependencies": ["assistan-web"],
+  "tags": []
+}
