@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@assistant-chat/assistant-dto": ["libs/shared/assistant-dto/src/index.ts"],
       "@assistant-chat/message-broker-client": [
         "libs/message-broker-client/src/index.ts"
       ]
