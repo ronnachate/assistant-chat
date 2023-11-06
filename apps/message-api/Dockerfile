@@ -22,6 +22,6 @@ COPY package.json ./
 COPY --from=build /app/dist/apps/message-api ./
 
 # install only production dependencies
-RUN npm install --only=production
+RUN npm install --omit=dev
 
 CMD ["node", "main"]

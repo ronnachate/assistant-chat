@@ -69,6 +69,20 @@ services:
     depends_on:
       - assitantdb
 
+  webapp:
+    build:
+      context: .
+      dockerfile: ./apps/assistant-web/Dockerfile
+    container_name: webapp
+    environment:
+      - GATEWAY_URL=${GATEWAY_URL}
+    ports:
+      - '3000:8080'
+    depends_on:
+      - assistant-api
+      - message-api
+      - apigateway
+
 volumes:
   assitantdb:
     external: false
