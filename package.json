@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build:web": "nx build assistan-web",
+    "build:web": "nx build assistant-web",
     "build:assistant-api": "nx build assistant-api",
     "build:message-api": "nx build message-api"
   },

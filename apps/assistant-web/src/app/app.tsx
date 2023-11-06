@@ -8,7 +8,7 @@ import { Route, Routes, Link } from 'react-router-dom';
 export function App() {
   return (
     <div>
-      <NxWelcome title="assistan-web" />
+      <NxWelcome title="assistant-web" />
 
       {/* START: routes */}
       {/* These routes and navigation have been generated for you */}
