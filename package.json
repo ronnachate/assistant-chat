@@ -1,5 +1,5 @@
 {
-  "name": "@assistant-chat/source",
+  "name": "assistant-chat",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {},
