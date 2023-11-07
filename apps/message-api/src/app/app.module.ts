@@ -7,6 +7,8 @@ import { SeqLoggerModule } from '@jasonsoft/nestjs-seq';
 
 import { configModuleOptions } from '../config/module.config';
 import { SERVICE_NAME } from '../constant/generic';
+import { MongooseModule } from '@nestjs/mongoose';
+import { MessageModule } from '../message/message.module';
 
 @Module({
   imports: [
@@ -20,6 +22,14 @@ import { SERVICE_NAME } from '../constant/generic';
         apiKey: configService.get<string>('seq.apiKey'),
       }),
     }),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        uri: configService.get<string>('mongo.uri'),
+      }),
+    }),
+    MessageModule
   ],
   controllers: [AppController],
   providers: [AppService],

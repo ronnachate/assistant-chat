@@ -7,4 +7,4 @@ export class Assistant extends AbstractDocument {
   assistantID: string;
 }
 
-export const OrderSchema = SchemaFactory.createForClass(Assistant);
+export const AssistantSchema = SchemaFactory.createForClass(Assistant);

@@ -6,6 +6,7 @@ import {
   UpdateQuery,
   SaveOptions,
   Connection,
+  ClientSession
 } from 'mongoose';
 import { AbstractDocument } from './abstract.schema';
 
@@ -71,7 +72,15 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
     });
   }
 
+
+
   async find(filterQuery: FilterQuery<TDocument>) {
     return this.model.find(filterQuery, {}, { lean: true });
+  }
+
+  async startTransaction(): Promise<ClientSession> {
+    const session = await this.connection.startSession();
+    session.startTransaction();
+    return session;
   }
 }

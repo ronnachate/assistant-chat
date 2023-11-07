@@ -12,6 +12,15 @@ services:
     volumes:
       - assitantdb:/var/lib/postgresql/data
 
+  messagedb:
+    image: mongo
+    environment:
+      - TZ=Asia/Jakarta
+    ports:
+      - "27017:27017"
+    volumes:
+      - messagedb:/data/db
+
   rabbitmq:
     image: rabbitmq:3-management-alpine
     environment:
@@ -85,4 +94,6 @@ services:
 
 volumes:
   assitantdb:
+    external: false
+  messagedb:
     external: false
