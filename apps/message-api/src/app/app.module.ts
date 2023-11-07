@@ -31,6 +31,7 @@ import { MessageModule } from '../message/message.module';
     }),
     MessageModule
   ],
+  exports: [SeqLoggerModule, ConfigModule],
   controllers: [AppController],
   providers: [AppService],
 })

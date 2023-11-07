@@ -5,6 +5,10 @@ export default (): any => ({
     },
     mongo: {
       uri: process.env.MONGODB_URI,
+    },
+    openai: {
+      apiKey: process.env.OPENAI_API_KEY,
+      modelId: process.env.OPENAI_MODEL,
     }
   });
   
