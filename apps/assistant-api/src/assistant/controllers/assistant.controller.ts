@@ -55,7 +55,7 @@ export class AssistantController {
 
       return { items: assistants, pagination: { page, rows, count } };
     } catch (error) {
-      this.logger.info('getAssistants error', {
+      this.logger.error('getAssistants error', {
         module: AssistantController.name,
         query: query,
         error: error,
@@ -103,7 +103,7 @@ export class AssistantController {
           }
         );
       } else {
-        this.logger.info(`getAssistant with id error id: "${id}"`, {
+        this.logger.error(`getAssistant with id error id: "${id}"`, {
           module: AssistantController.name,
           error: error,
         });
@@ -142,7 +142,7 @@ export class AssistantController {
       const assistant = await this.assistantService.newAssistant(input);
       return assistant;
     } catch (error) {
-      this.logger.info('new assistant erro', {
+      this.logger.error('new assistant erro', {
         module: AssistantController.name,
         input: input,
         error: error,
