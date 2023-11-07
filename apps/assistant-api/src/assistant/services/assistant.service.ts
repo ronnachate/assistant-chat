@@ -4,7 +4,7 @@ import { plainToClass, plainToInstance } from 'class-transformer';
 
 import { Equal, Not } from 'typeorm';
 import { Assistant } from '../entities/assistant.entity';
-import { AssistantDTO, CreateAssistantDTO } from '@assistant-chat/assistant-dto';
+import { AssistantDTO, CreateAssistantDTO } from '@assistant-chat/dtos';
 
 const SALT_ROUNDS = 10;
 

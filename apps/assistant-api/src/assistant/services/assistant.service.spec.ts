@@ -4,7 +4,7 @@ import { AssistantRepository } from '../repositories/assistant.repository';
 import { NotFoundException } from '@nestjs/common';
 import { Equal, Not } from 'typeorm';
 import e from 'express';
-import { CreateAssistantDTO } from '@assistant-chat/assistant-dto';
+import { CreateAssistantDTO } from '@assistant-chat/dtos';
 
 describe('AssistantService', () => {
   let service: AssistantService;

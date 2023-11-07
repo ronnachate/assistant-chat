@@ -18,7 +18,7 @@ import { AssistantService } from '../services/assistant.service';
 import {
   AssistantDTO,
   CreateAssistantDTO,
-} from '@assistant-chat/assistant-dto';
+} from '@assistant-chat/dtos';
 import { AssistantPaginationParams } from '../query-params/pagination-params';
 import { PaginationResultset } from '@assistant-chat/pagination';
 import { INTERNAL_SERVER_ERROR_MSG } from '@assistant-chat/constants';

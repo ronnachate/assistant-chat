@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common/exceptions';
 import { SeqLogger } from '@jasonsoft/nestjs-seq';
 import { INTERNAL_SERVER_ERROR_MSG } from '@assistant-chat/constants'
-import { CreateAssistantDTO } from '@assistant-chat/assistant-dto';
+import { CreateAssistantDTO } from '@assistant-chat/dtos';
 import { AssistantController } from './assistant.controller';
 import { AssistantService } from '../services/assistant.service';
 import { AssistantPaginationParams } from '../query-params/pagination-params';
