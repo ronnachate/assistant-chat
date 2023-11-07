@@ -8,6 +8,8 @@ import { SeqLoggerModule } from '@jasonsoft/nestjs-seq';
 import { configModuleOptions } from '../config/module.config';
 import { SERVICE_NAME } from '../constant/generic';
 
+console.log(__dirname + './../../migrations/');
+
 @Module({
   imports: [
     ConfigModule.forRoot(configModuleOptions),
@@ -29,9 +31,9 @@ import { SERVICE_NAME } from '../constant/generic';
         database: configService.get<string>('database.database'),
         username: configService.get<string>('database.username'),
         password: configService.get<string>('database.password'),
-        entities: [__dirname + './../**/entities/*.entity{.ts,.js}'],
-        migrations: [__dirname + './../../migrations/*{.ts,.js}'],
-        migrationsRun: false,
+        entities: [__dirname + '/../**/entities/*.entity{.ts,.js}'],
+        migrations: [__dirname + '/migrations/*{.ts,.js}'],
+        migrationsRun: true,
         synchronize: false,
       }),
     }),

@@ -12,7 +12,7 @@ const typeOrmConfig: TypeOrmModuleOptions = {
   password: process.env.DB_PASS,
   entities: [__dirname + './../**/entities/*.entity{.ts,.js}'],
   migrations: [__dirname + './../../migrations/*{.ts,.js}'],
-  migrationsRun: false,
+  migrationsRun: true,
   synchronize: false,
 };
 
