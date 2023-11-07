@@ -1,8 +1,8 @@
 import {
+  Column,
     CreateDateColumn,
     Entity,
     PrimaryGeneratedColumn,
-    Unique,
     UpdateDateColumn,
   } from 'typeorm';
   
@@ -11,7 +11,7 @@ import {
     @PrimaryGeneratedColumn('uuid')
     id: string;
   
-    @Unique('deviceToken', ['deviceToken'])
+    @Column({ unique: true })
     deviceToken: string;
   
     @CreateDateColumn({ name: 'createdAt', nullable: true })
