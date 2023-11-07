@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AssistantService } from './assistan.service';
+import { AssistantService } from './assistant.service';
 import { AssistantRepository } from '../repositories/assistant.repository';
 import { NotFoundException } from '@nestjs/common';
 import { Equal, Not } from 'typeorm';

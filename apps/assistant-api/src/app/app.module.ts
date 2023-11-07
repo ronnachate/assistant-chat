@@ -7,6 +7,7 @@ import { SeqLoggerModule } from '@jasonsoft/nestjs-seq';
 
 import { configModuleOptions } from '../config/module.config';
 import { SERVICE_NAME } from '../constant/generic';
+import { AssistantModule } from '../assistant/assistant.module';
 
 console.log(__dirname + './../../migrations/');
 
@@ -31,14 +32,16 @@ console.log(__dirname + './../../migrations/');
         database: configService.get<string>('database.database'),
         username: configService.get<string>('database.username'),
         password: configService.get<string>('database.password'),
-        entities: [__dirname + '/../**/entities/*.entity{.ts,.js}'],
-        migrations: [__dirname + '/migrations/*{.ts,.js}'],
+        autoLoadEntities: true,
         migrationsRun: true,
         synchronize: false,
       }),
     }),
+    AssistantModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
+
+
