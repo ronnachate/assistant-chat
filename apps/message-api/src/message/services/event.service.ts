@@ -1,14 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { SeqLogger } from '@jasonsoft/nestjs-seq';
-import { Nack, RabbitRPC } from '@golevelup/nestjs-rabbitmq';
-import { RABBITMQ_ASSISTANT_CREATE_ROUTING } from '@assistant-chat/constants';
-import { AssistantDTO } from '@assistant-chat/dtos';
+import { AmqpConnection, Nack, RabbitRPC } from '@golevelup/nestjs-rabbitmq';
+import { RABBITMQ_ASSISTANT_CREATE_ROUTING, RABBITMQ_MESSAGE_CREATE_ROUTING } from '@assistant-chat/constants';
+import { AssistantDTO, MessageDTO } from '@assistant-chat/dtos';
 import { AssistantRepository } from '../repositories/assistant.repository';
+import { Assistant } from '../schemas/assistant.schema';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class EventService {
   constructor(
+    private readonly configService: ConfigService,
+    private readonly amqpConnection: AmqpConnection,
     private readonly assistantRepository: AssistantRepository,
     private readonly logger: SeqLogger
   ) {}
@@ -20,9 +23,7 @@ export class EventService {
   public async assistantCreatedHandler(assistantDto: AssistantDTO) {
     try {
       this.logger.info('assistantCreatedHandler recieved', { assistantDto });
-      var newAssistant = {
-        assistantID: assistantDto.id,
-      };
+      var newAssistant = new Assistant(assistantDto.id);
       await this.assistantRepository.create(newAssistant);
       return assistantDto;
     } catch (err) {
@@ -30,7 +31,27 @@ export class EventService {
         module: EventService.name,
         error: err,
       });
-      throw err;
+      //return nack to rabbitmq, requeue the message
+      return new Nack(true);
+    }
+  }
+
+  async publishMeesageCreatedEvent(message: MessageDTO) {
+    try {
+      await this.amqpConnection.publish(
+        this.configService.get<string>('rabbitmq.exchangeName'),
+        RABBITMQ_MESSAGE_CREATE_ROUTING,
+        message
+      );
+      this.logger.info('publishMeesageCreatedEvent sent to rabitmq', {
+        module: EventService.name,
+        payload: message,
+      });
+    } catch (error) {
+      this.logger.error('publishMeesageCreatedEvent error', {
+        module: EventService.name,
+        error: error,
+      });
     }
   }
 }

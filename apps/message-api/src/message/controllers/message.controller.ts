@@ -17,6 +17,7 @@ import { MessageDTO, NewMessageDTO } from '@assistant-chat/dtos';
 import { MessagePaginationParams } from '../query-params/pagination-params';
 import { PaginationResultset } from '@assistant-chat/pagination';
 import { INTERNAL_SERVER_ERROR_MSG } from '@assistant-chat/constants';
+import { EventService } from '../services/event.service';
 
 @ApiTags('messages')
 @Controller('v1/messages')
@@ -24,6 +25,7 @@ import { INTERNAL_SERVER_ERROR_MSG } from '@assistant-chat/constants';
 export class MessageController {
   constructor(
     private readonly messageService: MessageService,
+    private readonly eventService: EventService,
     private readonly logger: SeqLogger
   ) {}
 
@@ -86,6 +88,7 @@ export class MessageController {
   async createMessage(@Body() input: NewMessageDTO): Promise<MessageDTO> {
     try {
       const responseMessage = await this.messageService.newMessage(input);
+      await this.eventService.publishMeesageCreatedEvent(responseMessage);
       return responseMessage;
     } catch (error) {
       this.logger.error('new message erro', {

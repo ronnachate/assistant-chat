@@ -7,3 +7,4 @@ export const UNKNOWN_RESPONSE = 'Sorry, I am not able to answer that question.';
 
 export const RABBITMQ_EXCHANGE_TOPIC = 'topic';
 export const RABBITMQ_ASSISTANT_CREATE_ROUTING='assistan-created';
+export const RABBITMQ_MESSAGE_CREATE_ROUTING='messages-created';
