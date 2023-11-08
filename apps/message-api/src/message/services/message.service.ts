@@ -71,8 +71,21 @@ export class MessageService {
     }
   }
 
-  async getMessageByAssistantID() {
-    return this.messageRepository.find({});
+  async getMessagesByAssistantID(
+    assistantID: string,
+    page: number,
+    rows: number
+  ): Promise<{ messages: MessageDTO[]; count: number }> {
+    let offset = (page - 1) * rows;
+    const filter = { assistantID: assistantID };
+    const count = await this.messageRepository.countDocuments({
+      assistantID: assistantID,
+    });
+    const messages = await this.messageRepository.find(filter, offset, rows);
+    const messagesOutput = plainToInstance(MessageDTO, messages, {
+      excludeExtraneousValues: true,
+    });
+    return { messages: messagesOutput, count };
   }
 
   async storeNewMessage(newMessage: Message) {
