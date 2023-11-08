@@ -24,6 +24,15 @@ export class Message extends AbstractDocument {
 
   @Prop()
   createdAt: Date;
+
+  public constructor(assistantID: string, typeID: number, content: string, isGptResponse: boolean, gptResponse: string) {
+    super();
+    this.assistantID = assistantID;
+    this.typeID = typeID;
+    this.content = content;
+    this.isGptResponse = isGptResponse;
+    this.createdAt = new Date();
+  }
 }
 
 export const MessageSchema = SchemaFactory.createForClass(Message);

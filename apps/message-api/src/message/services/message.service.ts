@@ -30,20 +30,28 @@ export class MessageService {
       throw new BadRequestException('Invalid Assitant ID');
     }
 
-    let newMessage: Message = plainToInstance(Message, request);
+    let newMessage: Message = new Message(
+      request.assistantID,
+      MESSAGE_TYPE_REUQEST_ID,
+      request.content,
+      false,
+      null
+    );
     newMessage.typeID = MESSAGE_TYPE_REUQEST_ID;
-    await this.storeNewMessage(newMessage);
+    await this.messageRepository.create(newMessage);
 
     try {
       //connect to gpt
       var result = await this.openaiService.ask(newMessage.content);
       if (result.choices.length > 0) {
-        let responseMessage: Message = plainToInstance(Message, {
-          isGptResponse: true,
-          typeID: MESSAGE_TYPE_RESPONSE_ID,
-          content: result.choices[0].message.content,
-        });
-        const message = await this.storeNewMessage(responseMessage);
+        const responseMessage: Message = new Message(
+          request.assistantID,
+          MESSAGE_TYPE_RESPONSE_ID,
+          result.choices[0].message.content,
+          true,
+          JSON.stringify(result)
+        );
+        const message = await this.messageRepository.create(responseMessage);
         return plainToInstance(MessageDTO, message);
       } else {
         //no choice response from gpt, return default message
@@ -51,22 +59,27 @@ export class MessageService {
           module: MessageService.name,
           openapiResult: result,
         });
-        let responseMessage: Message = plainToInstance(Message, {
-          isGptResponse: false,
-          typeID: MESSAGE_TYPE_RESPONSE_ID,
-          content: UNKNOWN_RESPONSE,
-        });
-        const message = await this.storeNewMessage(responseMessage);
+
+        const responseMessage: Message = new Message(
+          request.assistantID,
+          MESSAGE_TYPE_RESPONSE_ID,
+          UNKNOWN_RESPONSE,
+          false,
+          JSON.stringify(result)
+        );
+        const message = await this.messageRepository.create(responseMessage);
         return plainToInstance(MessageDTO, message);
       }
     } catch (err) {
       //connect to gpt failed, return default message
-      let responseMessage: Message = plainToInstance(Message, {
-        isGptResponse: false,
-        typeID: MESSAGE_TYPE_RESPONSE_ID,
-        content: UNKNOWN_RESPONSE,
-      });
-      const message = await this.storeNewMessage(responseMessage);
+      const responseMessage: Message = new Message(
+        request.assistantID,
+        MESSAGE_TYPE_RESPONSE_ID,
+        UNKNOWN_RESPONSE,
+        false,
+        null
+      );
+      const message = await this.messageRepository.create(responseMessage);
       return plainToInstance(MessageDTO, message);
     }
   }
@@ -89,23 +102,5 @@ export class MessageService {
       excludeExtraneousValues: true,
     });
     return { messages: messagesOutput, count };
-  }
-
-  async storeNewMessage(newMessage: Message) {
-    const session = await this.messageRepository.startTransaction();
-    try {
-      const message = await this.messageRepository.create(newMessage, {
-        session,
-      });
-      await session.commitTransaction();
-      return message;
-    } catch (err) {
-      this.logger.error('save to mongodb failed', {
-        module: MessageService.name,
-        error: err,
-      });
-      await session.abortTransaction();
-      throw err;
-    }
   }
 }
