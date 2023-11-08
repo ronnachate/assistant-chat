@@ -5,8 +5,6 @@ import {
   Get,
   HttpException,
   HttpStatus,
-  NotFoundException,
-  Param,
   Post,
   Query,
   UseInterceptors,
@@ -31,7 +29,7 @@ export class MessageController {
 
   @Get()
   @ApiOperation({
-    summary: 'Get assistants with pagination',
+    summary: 'Get messages with pagination',
   })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -73,7 +71,7 @@ export class MessageController {
 
   @Post()
   @ApiOperation({
-    summary: 'Create new assistant',
+    summary: 'Create new message',
   })
   @ApiResponse({
     status: HttpStatus.OK,

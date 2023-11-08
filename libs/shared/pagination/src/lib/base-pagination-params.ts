@@ -4,7 +4,7 @@ import { ApiPropertyOptional } from '@nestjs/swagger';
 
 export class BasePaginationParams {
   @ApiPropertyOptional({
-    description: 'Optional, defaults to 1',
+    description: 'page params, optional, defaults to 1',
     type: Number,
   })
   @IsNumber()
@@ -14,7 +14,7 @@ export class BasePaginationParams {
   page = 1;
 
   @ApiPropertyOptional({
-    description: 'Optional, defaults to 10',
+    description: 'rows params, optional, defaults to 10',
     type: Number,
   })
   @IsNumber()
