@@ -1,4 +1,4 @@
-web:
+webapp:
   access_log_path: "/dev/null"
   address:
     socket_address:
@@ -17,37 +17,25 @@ static_resources:
           codec_type: auto
           stat_prefix: ingress_http
           route_config:
-            name: wedev_backend_route
+            name: assistant_route
             virtual_hosts:
-            - name: wedev_backend
+            - name: assistant_service
               domains:
               - "*"
               routes:
-              - name: "a-short"
-                match:
-                  prefix: "/a/"
-                route:
-                  auto_host_rewrite: true
-                  prefix_rewrite: "/assistant-api/"
-                  cluster: assistant
-              - name: "a-long"
+              - name: "assistant"
                 match:
                   prefix: "/assistant-api/"
                 route:
                   auto_host_rewrite: true
+                  prefix_rewrite: "/"
                   cluster: assistant
-              - name: "message-short"
-                match:
-                  prefix: "/au/"
-                route:
-                  auto_host_rewrite: true
-                  prefix_rewrite: "/message-api/"
-                  cluster: message
-              - name: "message-long"
+              - name: "message"
                 match:
                   prefix: "/message-api/"
                 route:
                   auto_host_rewrite: true
+                  prefix_rewrite: "/"
                   cluster: message
           http_filters:
           - name: envoy.router

@@ -42,7 +42,7 @@ services:
     volumes:
       - ./apigateway/envoy/envoy.yaml:/etc/envoy/envoy.yaml
     ports:
-    - "4200:80"
+    - "4001:80"
 
   assistant-api:
     build:
@@ -51,15 +51,21 @@ services:
     container_name: assistant-api
     environment:
       - PORT=${PORT}
-      - DB_HOST=postgresdb
+      - DB_HOST=assitantdb
       - DB_PORT=${DB_PORT}
       - DB_NAME=${DB_NAME}
       - DB_USER=${DB_USER}
       - DB_PASS=${DB_PASS}
+      - SEQ_SERVER_URL=http://seq:5340
+      - SEQ_API_KEY=${SEQ_API_KEY}
+      - RABBITMQ_EXCHANGE_NAME=${RABBITMQ_EXCHANGE_NAME}
+      - RABBITMQ_URI=amqp://guest:guest@rabbitmq:5672
     ports:
       - '3001:3001'
     depends_on:
       - assitantdb
+      - rabbitmq
+      - seq
   
   message-api:
     build:
@@ -68,15 +74,19 @@ services:
     container_name: message-api
     environment:
       - PORT=${PORT}
-      - DB_HOST=postgresdb
-      - DB_PORT=${DB_PORT}
-      - DB_NAME=${DB_NAME}
-      - DB_USER=${DB_USER}
-      - DB_PASS=${DB_PASS}
+      - SEQ_SERVER_URL=http://seq:5340
+      - SEQ_API_KEY=${SEQ_API_KEY}
+      - RABBITMQ_EXCHANGE_NAME=${RABBITMQ_EXCHANGE_NAME}
+      - RABBITMQ_URI=amqp://guest:guest@rabbitmq:5672
+      - MONGODB_URI=mongodb://messagedb:27017
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL=${OPENAI_MODEL}
     ports:
       - '3002:3002'
     depends_on:
-      - assitantdb
+      - messagedb
+      - rabbitmq
+      - seq
 
   webapp:
     build:
