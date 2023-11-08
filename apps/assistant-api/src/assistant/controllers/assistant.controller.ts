@@ -21,7 +21,9 @@ import {
 } from '@assistant-chat/dtos';
 import { AssistantPaginationParams } from '../query-params/pagination-params';
 import { PaginationResultset } from '@assistant-chat/pagination';
-import { INTERNAL_SERVER_ERROR_MSG } from '@assistant-chat/constants';
+import { INTERNAL_SERVER_ERROR_MSG, RABBITMQ_ASSISTANT_CREATE_ROUTING } from '@assistant-chat/constants';
+import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
+import { EventService } from '../services/event.service';
 
 @ApiTags('assistants')
 @Controller('v1/assistants')
@@ -29,6 +31,7 @@ import { INTERNAL_SERVER_ERROR_MSG } from '@assistant-chat/constants';
 export class AssistantController {
   constructor(
     private readonly assistantService: AssistantService,
+    private readonly eventService: EventService,
     private readonly logger: SeqLogger
   ) {}
 
@@ -140,6 +143,7 @@ export class AssistantController {
   ): Promise<AssistantDTO> {
     try {
       const assistant = await this.assistantService.newAssistant(input);
+      this.eventService.publishAssistantCreatedEvent(assistant);
       return assistant;
     } catch (error) {
       this.logger.error('new assistant erro', {

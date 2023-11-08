@@ -9,5 +9,9 @@ export default (): any => ({
       serverUrl: process.env.SEQ_SERVER_URL,
       apiKey: process.env.SEQ_API_KEY,
     },
+    rabbitmq: {
+      exchangeName: process.env.RABBITMQ_EXCHANGE_NAME,
+      uri: process.env.RABBITMQ_URI,
+    }
   });
   

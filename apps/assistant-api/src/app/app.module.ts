@@ -9,8 +9,6 @@ import { configModuleOptions } from '../config/module.config';
 import { SERVICE_NAME } from '../constant/generic';
 import { AssistantModule } from '../assistant/assistant.module';
 
-console.log(__dirname + './../../migrations/');
-
 @Module({
   imports: [
     ConfigModule.forRoot(configModuleOptions),
