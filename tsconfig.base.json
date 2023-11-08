@@ -19,9 +19,6 @@
         "libs/shared/dto/src/index.ts"
       ],
       "@assistant-chat/constants": ["libs/shared/constant/src/index.ts"],
-      "@assistant-chat/message-broker-client": [
-        "libs/message-broker-client/src/index.ts"
-      ],
       "@assistant-chat/pagination": ["libs/shared/pagination/src/index.ts"],
       "@assistant-chat/mongodb": ["libs/mongodb/src/index.ts"]
     }
