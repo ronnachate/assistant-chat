@@ -9,6 +9,10 @@ export default (): any => ({
     openai: {
       apiKey: process.env.OPENAI_API_KEY,
       modelId: process.env.OPENAI_MODEL,
+    },
+    rabbitmq: {
+      exchangeName: process.env.RABBITMQ_EXCHANGE_NAME,
+      uri: process.env.RABBITMQ_URI,
     }
   });
   

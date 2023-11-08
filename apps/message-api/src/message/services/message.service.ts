@@ -7,7 +7,7 @@ import {
   UNKNOWN_RESPONSE,
 } from '@assistant-chat/constants';
 import { MessageRepository } from '../repositories/message.repository';
-import { AssistantRepository } from '../../assistant/repositories/assistant.repository';
+import { AssistantRepository } from '../repositories/assistant.repository';
 import { Message } from '../schemas/message.schema';
 import { OpenaiService } from './openai.service';
 import { SeqLogger } from '@jasonsoft/nestjs-seq';

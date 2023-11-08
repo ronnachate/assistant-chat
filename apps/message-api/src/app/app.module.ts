@@ -29,7 +29,8 @@ import { MessageModule } from '../message/message.module';
         uri: configService.get<string>('mongo.uri'),
       }),
     }),
-    MessageModule
+    MessageModule,
+
   ],
   exports: [SeqLoggerModule, ConfigModule],
   controllers: [AppController],
