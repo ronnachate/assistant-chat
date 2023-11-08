@@ -1,6 +1,6 @@
 import { BasePaginationParams } from '@assistant-chat/pagination';
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsOptional, IsString, Min } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
 export class MessagePaginationParams extends BasePaginationParams {
   @ApiPropertyOptional({
