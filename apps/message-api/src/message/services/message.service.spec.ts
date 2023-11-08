@@ -76,7 +76,7 @@ describe('OpenaiService', () => {
     //TODO: add more test cases, not enough time, will be added later
   });
 
-  describe('getMessagesByAssistantID', () => {
+  describe('getMessages', () => {
     const message = {
       assistantID: '123',
       content: 'hello',
@@ -93,7 +93,7 @@ describe('OpenaiService', () => {
     });
 
     it('should return correct result', async () => {
-      const { messages, count} = await service.getMessagesByAssistantID('123', 1, 10);
+      const { messages, count} = await service.getMessages('123', 1, 10);
       expect(mockedMessageRepository.countDocuments).toHaveBeenCalled();
       expect(mockedMessageRepository.find).toHaveBeenCalled();
       
@@ -104,7 +104,7 @@ describe('OpenaiService', () => {
     });
 
     it('should return run correct filter', async () => {
-      await service.getMessagesByAssistantID('123', 1, 10);
+      await service.getMessages('123', 1, 10);
       expect(mockedMessageRepository.countDocuments).toHaveBeenCalledWith({ assistantID: '123' });
       expect(mockedMessageRepository.find).toHaveBeenCalledWith({ assistantID: '123'}, 0, 10 );
     });

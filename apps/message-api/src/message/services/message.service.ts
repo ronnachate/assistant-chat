@@ -71,13 +71,16 @@ export class MessageService {
     }
   }
 
-  async getMessagesByAssistantID(
-    assistantID: string,
+  async getMessages(
+    assistantID: string | null,
     page: number,
     rows: number
   ): Promise<{ messages: MessageDTO[]; count: number }> {
-    let offset = (page - 1) * rows;
-    const filter = { assistantID: assistantID };
+    const offset = (page - 1) * rows;
+    let filter = {};
+    if (assistantID) {
+      filter = { assistantID: assistantID };
+    }
     const count = await this.messageRepository.countDocuments({
       assistantID: assistantID,
     });
