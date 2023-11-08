@@ -70,5 +70,7 @@ describe('OpenaiService', () => {
         expect(error).toBeInstanceOf(BadRequestException);
       }
     });
+
+    //TODO: add more test cases, not enough time, will be added later
   });
 });

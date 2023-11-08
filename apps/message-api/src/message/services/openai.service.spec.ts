@@ -37,7 +37,7 @@ describe('OpenaiService', () => {
   });
 
   describe('ask', () => {
-    it('should return serialized user', async () => {
+    it('should return completions', async () => {
       const result = await service.ask('hello');
       expect(result).toBeDefined();
     });
