@@ -1,8 +1,11 @@
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import App from './app/app';
+import Chat from './pages/chat';
+
+import "mdb-react-ui-kit/dist/css/mdb.min.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -10,7 +13,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+    <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/chat" element={<Chat />} />
+      </Routes>
     </BrowserRouter>
   </StrictMode>
 );

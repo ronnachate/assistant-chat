@@ -8,6 +8,9 @@
  import './app.css';
 export function NxWelcome({ title }: { title: string }) {
   
+  const handleStart = () => {
+
+  };
   return (
     <>
       <div className="wrapper">
@@ -37,7 +40,7 @@ export function NxWelcome({ title }: { title: string }) {
                 </svg>
                 <span>You&apos;re up and running</span>
               </h2>
-              <a href="#commands"> Start Chat? </a>
+              <a href="/chat"> Start Chat? </a>
             </div>
             <div className="logo-container">
               <svg

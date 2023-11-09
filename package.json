@@ -25,6 +25,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "install": "^0.13.0",
+    "mdb-react-ui-kit": "^7.0.0",
     "mongoose": "^7.6.4",
     "npm": "^10.2.3",
     "openai": "^4.16.1",

@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const _serverUrl = api_path;
 
-const baseUrl = `${_serverUrl}/v1/assistants`;
+const baseUrl = `${_serverUrl}/assistant-api/api/v1/assistants`;
 
 export const newAssistant = async () => {
   const deviceToken = uuidv4();
