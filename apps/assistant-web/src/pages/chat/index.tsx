@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   MDBContainer,
   MDBRow,
@@ -6,22 +6,24 @@ import {
   MDBCard,
   MDBCardHeader,
   MDBCardBody,
+  MDBCardFooter,
   MDBIcon,
   MDBTextArea,
-} from "mdb-react-ui-kit";
-import "./chat.css";
+  MDBBtn,
+} from 'mdb-react-ui-kit';
+import './chat.css';
 
 function Chat() {
   return (
     <MDBContainer className="py-5">
       <MDBRow className="d-flex justify-content-center">
         <MDBCol md="8" lg="8" xl="8">
-          <MDBCard id="chat1" style={{ borderRadius: "15px" }}>
+          <MDBCard id="chat1" style={{ borderRadius: '15px' }}>
             <MDBCardHeader
               className="d-flex justify-content-between align-items-center p-3 bg-info text-white border-bottom-0"
               style={{
-                borderTopLeftRadius: "15px",
-                borderTopRightRadius: "15px",
+                borderTopLeftRadius: '15px',
+                borderTopRightRadius: '15px',
               }}
             >
               <MDBIcon fas icon="angle-left" />
@@ -32,15 +34,15 @@ function Chat() {
             <MDBCardBody>
               <div className="d-flex flex-row justify-content-start mb-4">
                 <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                  src="/assets/images/live-chat.png"
                   alt="avatar 1"
-                  style={{ width: "45px", height: "100%" }}
+                  style={{ width: '45px', height: '100%' }}
                 />
                 <div
                   className="p-3 ms-3"
                   style={{
-                    borderRadius: "15px",
-                    backgroundColor: "rgba(57, 192, 237,.2)",
+                    borderRadius: '15px',
+                    backgroundColor: 'rgba(57, 192, 237,.2)',
                   }}
                 >
                   <p className="small mb-0">
@@ -53,62 +55,30 @@ function Chat() {
               <div className="d-flex flex-row justify-content-end mb-4">
                 <div
                   className="p-3 me-3 border"
-                  style={{ borderRadius: "15px", backgroundColor: "#fbfbfb" }}
+                  style={{ borderRadius: '15px', backgroundColor: '#fbfbfb' }}
                 >
                   <p className="small mb-0">
                     Thank you, I really like your product.
                   </p>
                 </div>
                 <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
+                  src="/assets/images/user.png"
                   alt="avatar 1"
-                  style={{ width: "45px", height: "100%" }}
+                  style={{ width: '45px', height: '100%' }}
                 />
-              </div>
-
-              <div className="d-flex flex-row justify-content-start mb-4">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                  alt="avatar 1"
-                  style={{ width: "45px", height: "100%" }}
-                />
-                <div className="ms-3" style={{ borderRadius: "15px" }}>
-                  <div className="bg-image">
-                    <img
-                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/screenshot1.webp"
-                      style={{ borderRadius: "15px" }}
-                      alt="video"
-                    />
-                    <a href="#!">
-                      <div className="mask"></div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="d-flex flex-row justify-content-start mb-4">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                  alt="avatar 1"
-                  style={{ width: "45px", height: "100%" }}
-                />
-                <div
-                  className="p-3 ms-3"
-                  style={{
-                    borderRadius: "15px",
-                    backgroundColor: "rgba(57, 192, 237,.2)",
-                  }}
-                >
-                  <p className="small mb-0">...</p>
-                </div>
               </div>
 
               <MDBTextArea
-                className="form-outline"
+                className="form-outline mt-5"
                 label="Type your message"
                 id="textAreaExample"
                 rows={4}
               />
+              <MDBRow className="d-flex justify-content-end">
+                <MDBCol md="3" lg="3" xl="3">
+                  <MDBBtn className="mt-3 btn-info">Send</MDBBtn>
+                </MDBCol>
+              </MDBRow>
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
