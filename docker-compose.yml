@@ -56,7 +56,7 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_USER=${DB_USER}
       - DB_PASS=${DB_PASS}
-      - SEQ_SERVER_URL=http://seq:5340
+      - SEQ_SERVER_URL=http://seq:80
       - SEQ_API_KEY=${SEQ_API_KEY}
       - RABBITMQ_EXCHANGE_NAME=${RABBITMQ_EXCHANGE_NAME}
       - RABBITMQ_URI=amqp://guest:guest@rabbitmq:5672
@@ -74,7 +74,7 @@ services:
     container_name: message-api
     environment:
       - PORT=${PORT}
-      - SEQ_SERVER_URL=http://seq:5340
+      - SEQ_SERVER_URL=http://seq:80
       - SEQ_API_KEY=${SEQ_API_KEY}
       - RABBITMQ_EXCHANGE_NAME=${RABBITMQ_EXCHANGE_NAME}
       - RABBITMQ_URI=amqp://guest:guest@rabbitmq:5672
@@ -94,7 +94,7 @@ services:
       dockerfile: ./apps/assistant-web/Dockerfile
     container_name: webapp
     environment:
-      - GATEWAY_URL=${GATEWAY_URL}
+      - NX_API_GATEWAY_URL=apigateway
     ports:
       - '3000:8080'
     depends_on:
