@@ -31,6 +31,7 @@ export class Message extends AbstractDocument {
     this.typeID = typeID;
     this.content = content;
     this.isGptResponse = isGptResponse;
+    this.gptResponse = gptResponse;
     this.createdAt = new Date();
   }
 }
