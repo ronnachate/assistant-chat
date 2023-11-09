@@ -1,4 +1,6 @@
-function UserMessage() {
+import { MessageDTO } from '@assistant-chat/dtos';
+
+function UserMessage({ message }: { message: MessageDTO }) {
   return (
     <>
       <div className="d-flex flex-row justify-content-end mb-4">
@@ -6,7 +8,7 @@ function UserMessage() {
           className="p-3 me-3 border"
           style={{ borderRadius: '15px', backgroundColor: '#fbfbfb' }}
         >
-          <p className="small mb-0">Thank you, I really like your product.</p>
+          <p className="small mb-0">{message.content}</p>
         </div>
         <img
           src="/assets/images/user.png"

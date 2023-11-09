@@ -1,4 +1,6 @@
-function SystemMessage() {
+import { MessageDTO } from '@assistant-chat/dtos';
+
+function SystemMessage({ message }: { message: MessageDTO }) {
   return (
     <>
       <div className="d-flex flex-row justify-content-start mb-4">
@@ -14,10 +16,7 @@ function SystemMessage() {
             backgroundColor: 'rgba(57, 192, 237,.2)',
           }}
         >
-          <p className="small mb-0">
-            Hello and thank you for visiting MDBootstrap. Please click the video
-            below.
-          </p>
+          <p className="small mb-0">{message.content}</p>
         </div>
       </div>
     </>
