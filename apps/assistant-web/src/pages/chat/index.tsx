@@ -6,12 +6,13 @@ import {
   MDBCard,
   MDBCardHeader,
   MDBCardBody,
-  MDBCardFooter,
   MDBIcon,
   MDBTextArea,
   MDBBtn,
 } from 'mdb-react-ui-kit';
 import './chat.css';
+import SystemMessage from '../../components/SystemMessage';
+import UserMessage from '../../components/UserMessage';
 
 function Chat() {
   return (
@@ -32,41 +33,9 @@ function Chat() {
             </MDBCardHeader>
 
             <MDBCardBody>
-              <div className="d-flex flex-row justify-content-start mb-4">
-                <img
-                  src="/assets/images/live-chat.png"
-                  alt="avatar 1"
-                  style={{ width: '45px', height: '100%' }}
-                />
-                <div
-                  className="p-3 ms-3"
-                  style={{
-                    borderRadius: '15px',
-                    backgroundColor: 'rgba(57, 192, 237,.2)',
-                  }}
-                >
-                  <p className="small mb-0">
-                    Hello and thank you for visiting MDBootstrap. Please click
-                    the video below.
-                  </p>
-                </div>
-              </div>
+              <SystemMessage />
 
-              <div className="d-flex flex-row justify-content-end mb-4">
-                <div
-                  className="p-3 me-3 border"
-                  style={{ borderRadius: '15px', backgroundColor: '#fbfbfb' }}
-                >
-                  <p className="small mb-0">
-                    Thank you, I really like your product.
-                  </p>
-                </div>
-                <img
-                  src="/assets/images/user.png"
-                  alt="avatar 1"
-                  style={{ width: '45px', height: '100%' }}
-                />
-              </div>
+              <UserMessage />
 
               <MDBTextArea
                 className="form-outline mt-5"
