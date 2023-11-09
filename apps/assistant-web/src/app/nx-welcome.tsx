@@ -7,10 +7,6 @@
  */
  import './app.css';
 export function NxWelcome({ title }: { title: string }) {
-  
-  const handleStart = () => {
-
-  };
   return (
     <>
       <div className="wrapper">

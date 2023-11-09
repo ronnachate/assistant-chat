@@ -10,11 +10,12 @@ const baseUrl = `${_serverUrl}/assistant-api/api/v1/assistants`;
 export const newAssistant = async () => {
   const deviceToken = uuidv4();
   //reuquest to create new assistant
-  return axios
+  return httpClient
     .post(`${baseUrl}`, {
       deviceToken,
     })
     .then((response) => {
+      console.log(response);
       if (response.data.id) {
         localStorage.setItem(ASSISTANT_KEY, response.data.id);
         return response.data.id;

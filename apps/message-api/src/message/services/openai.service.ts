@@ -42,7 +42,7 @@ export class OpenaiService {
           index: 0,
           message: {
             role: 'assistant',
-            content: 'Hello there, how may I assist you today?',
+            content: 'Can you ask your question in a different way?',
           },
           finish_reason: 'stop',
         },

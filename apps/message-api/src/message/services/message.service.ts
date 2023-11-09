@@ -94,9 +94,7 @@ export class MessageService {
     if (assistantID) {
       filter = { assistantID: assistantID };
     }
-    const count = await this.messageRepository.countDocuments({
-      assistantID: assistantID,
-    });
+    const count = await this.messageRepository.countDocuments(filter);
     const messages = await this.messageRepository.find(filter, offset, rows);
     const messagesOutput = plainToInstance(MessageDTO, messages, {
       excludeExtraneousValues: true,
