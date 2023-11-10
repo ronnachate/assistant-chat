@@ -38,12 +38,18 @@ export class MessageService {
       null
     );
     newMessage.typeID = MESSAGE_TYPE_REUQEST_ID;
-    await this.messageRepository.create(newMessage);
+    newMessage.createdAt = new Date();
 
     try {
       //connect to gpt
       var result = await this.openaiService.ask(newMessage.content);
       if (result.choices.length > 0) {
+
+        //update result to question
+        newMessage.isGptResponse = true;
+        newMessage.gptResponse = JSON.stringify(result);
+        await this.messageRepository.create(newMessage);
+
         const responseMessage: Message = new Message(
           request.assistantID,
           MESSAGE_TYPE_RESPONSE_ID,
@@ -51,6 +57,7 @@ export class MessageService {
           true,
           JSON.stringify(result)
         );
+        responseMessage.createdAt = new Date();
         const message = await this.messageRepository.create(responseMessage);
         return plainToInstance(MessageDTO, message);
       } else {
@@ -60,6 +67,11 @@ export class MessageService {
           openapiResult: result,
         });
 
+        //update result to question
+        newMessage.isGptResponse = false;
+        newMessage.gptResponse = JSON.stringify(result);
+        await this.messageRepository.create(newMessage);
+
         const responseMessage: Message = new Message(
           request.assistantID,
           MESSAGE_TYPE_RESPONSE_ID,
@@ -67,10 +79,16 @@ export class MessageService {
           false,
           JSON.stringify(result)
         );
+        responseMessage.createdAt = new Date();
         const message = await this.messageRepository.create(responseMessage);
         return plainToInstance(MessageDTO, message);
       }
     } catch (err) {
+
+      //update result to question
+      newMessage.isGptResponse = false;
+      await this.messageRepository.create(newMessage);
+
       //connect to gpt failed, return default message
       const responseMessage: Message = new Message(
         request.assistantID,
@@ -79,6 +97,7 @@ export class MessageService {
         false,
         null
       );
+      responseMessage.createdAt = new Date();
       const message = await this.messageRepository.create(responseMessage);
       return plainToInstance(MessageDTO, message);
     }
